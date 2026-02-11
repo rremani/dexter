@@ -12,6 +12,8 @@ Dexter is an autonomous financial research agent that thinks, plans, and learns 
 - [🚀 How to Run](#-how-to-run)
 - [📊 How to Evaluate](#-how-to-evaluate)
 - [🐛 How to Debug](#-how-to-debug)
+- [🛠️ Built-in Skills](#️-built-in-skills)
+- [🐍 Python REPL Tool](#-python-repl-tool)
 - [🤝 How to Contribute](#-how-to-contribute)
 - [📄 License](#-license)
 
@@ -230,6 +232,54 @@ MCP tools are prefixed with `mcp_{serverName}_` to avoid conflicts. For example:
 - `mcp_github_create_issue`
 
 The agent will automatically use these tools when appropriate for your queries.
+
+## 🛠️ Built-in Skills
+
+Dexter ships with built-in skills — specialized workflows the agent can invoke for complex tasks. Skills are automatically discovered and made available to the agent.
+
+| Skill | Description |
+|-------|-------------|
+| `dcf-valuation` | Performs discounted cash flow analysis to estimate intrinsic value per share |
+| `senior-data-scientist` | Data science skill for statistical modeling, ML, and advanced analytics |
+| `portfolio-rebalancer` | Autonomous portfolio manager — analyzes holdings, scans for opportunities, and executes trades |
+
+**Trigger a skill** by asking naturally — e.g., "rebalance my portfolio", "what is AAPL worth?", "build a predictive model".
+
+### Portfolio Rebalancer
+
+> **EXPERIMENTAL — USE WITH EXTREME CAUTION**
+>
+> The `portfolio-rebalancer` skill is **experimental** and provided strictly for **educational and research purposes only**. It is **not financial advice**. This skill can connect to your live Zerodha account and **place real orders with real money**.
+>
+> **By using this skill, you acknowledge that:**
+> - This is an AI agent making autonomous trading decisions — it can and will be wrong
+> - AI-generated analysis may contain errors, hallucinations, or flawed reasoning
+> - Past performance metrics computed by the agent do not guarantee future results
+> - The developers accept **no responsibility** for any financial losses incurred
+> - You should **never rely solely on this tool** for investment decisions
+> - Always review and verify any trades before they are executed
+> - Consider using this in a **paper trading / sandbox environment** first
+>
+> **If you are not comfortable with an AI placing trades on your behalf, do not use this skill.** Consult a qualified financial advisor for investment decisions.
+
+When triggered (e.g., "rebalance my portfolio"), the portfolio rebalancer will:
+1. Fetch your live holdings, positions, and available cash from Zerodha
+2. Run deep portfolio health analysis (concentration, sector exposure, fundamentals, risk metrics)
+3. Gather macro and geopolitical context (RBI policy, FII/DII flows, global events)
+4. Scan for new opportunities across Nifty 50, Nifty Next 50, and sector leaders
+5. Make a verdict: **Hold** (portfolio is healthy) or **Rebalance** (with specific trades)
+6. Place GTT orders via Zerodha for approved trades
+
+Requires: Zerodha Kite MCP server configured in `.dexter/mcp.json` (see [MCP Support](#mcp-model-context-protocol-support)).
+
+## 🐍 Python REPL Tool
+
+Dexter includes a built-in Python code execution tool (`python_repl`) that allows the agent to run Python code directly. This powers data analysis, ML model training, statistical computations, and more.
+
+- Executes inline code or `.py` files
+- Supports `pip_install` parameter for installing packages on the fly (e.g., `numpy`, `pandas`, `scikit-learn`, `yfinance`)
+- Configurable timeout (default 120s, max 600s)
+- Requires Python 3 installed on your system (`python3` or `python` on PATH)
 
 ## 🤝 How to Contribute
 

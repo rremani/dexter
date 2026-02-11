@@ -6,6 +6,9 @@ export type { RegisteredTool } from './registry.js';
 export { createFinancialSearch } from './finance/index.js';
 export { tavilySearch } from './search/index.js';
 
+// Python tool
+export { pythonReplTool } from './python/index.js';
+
 // Tool descriptions
 export {
   FINANCIAL_SEARCH_DESCRIPTION,
