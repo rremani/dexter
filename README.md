@@ -14,6 +14,7 @@ Dexter is an autonomous financial research agent that thinks, plans, and learns 
 - [🐛 How to Debug](#-how-to-debug)
 - [🛠️ Built-in Skills](#️-built-in-skills)
 - [🐍 Python REPL Tool](#-python-repl-tool)
+- [📱 How to Use with WhatsApp](#-how-to-use-with-whatsapp)
 - [🤝 How to Contribute](#-how-to-contribute)
 - [📄 License](#-license)
 
@@ -29,9 +30,9 @@ Dexter takes complex financial questions and turns them into clear, step-by-step
 - **Real-Time Financial Data**: Access to income statements, balance sheets, and cash flow statements
 - **Safety Features**: Built-in loop detection and step limits to prevent runaway execution
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt)
+[![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt) [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=social&logo=discord)](https://discord.gg/jpGHv2XB6T)
 
-<img width="875" height="558" alt="Screenshot 2026-01-21 at 5 22 19 PM" src="https://github.com/user-attachments/assets/72d28363-69ea-4c74-a297-dfa60aa347f7" />
+<img width="1042" height="638" alt="Screenshot 2026-02-18 at 12 21 25 PM" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
 
 
 ## ✅ Prerequisites
@@ -280,6 +281,23 @@ Dexter includes a built-in Python code execution tool (`python_repl`) that allow
 - Supports `pip_install` parameter for installing packages on the fly (e.g., `numpy`, `pandas`, `scikit-learn`, `yfinance`)
 - Configurable timeout (default 120s, max 600s)
 - Requires Python 3 installed on your system (`python3` or `python` on PATH)
+
+## 📱 How to Use with WhatsApp
+
+Chat with Dexter through WhatsApp by linking your phone to the gateway. Messages you send to yourself are processed by Dexter and responses are sent back to the same chat.
+
+**Quick start:**
+```bash
+# Link your WhatsApp account (scan QR code)
+bun run gateway:login
+
+# Start the gateway
+bun run gateway
+```
+
+Then open WhatsApp, go to your own chat (message yourself), and ask Dexter a question.
+
+For detailed setup instructions, configuration options, and troubleshooting, see the [WhatsApp Gateway README](src/gateway/channels/whatsapp/README.md).
 
 ## 🤝 How to Contribute
 
