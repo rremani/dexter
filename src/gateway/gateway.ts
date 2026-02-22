@@ -13,6 +13,9 @@ import { runAgentForMessage } from './agent-runner.js';
 import { appendFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { getSetting } from '../utils/config.js';
+import { getDefaultModelForProvider } from '../utils/model.js';
+import { DEFAULT_PROVIDER, DEFAULT_MODEL } from '../model/llm.js';
 
 const LOG_PATH = join(homedir(), '.dexter', 'gateway-debug.log');
 function debugLog(msg: string) {
@@ -98,11 +101,13 @@ async function handleInbound(cfg: GatewayConfig, inbound: WhatsAppInboundMessage
     console.log(`Processing message with agent...`);
     debugLog(`[gateway] running agent for session=${route.sessionKey}`);
     const startedAt = Date.now();
+    const provider = getSetting('provider', DEFAULT_PROVIDER);
+    const model = (getSetting('modelId', null) as string | null) ?? getDefaultModelForProvider(provider) ?? DEFAULT_MODEL;
     const answer = await runAgentForMessage({
       sessionKey: route.sessionKey,
       query: inbound.body,
-      model: 'gpt-5.2',
-      modelProvider: 'openai',
+      model,
+      modelProvider: provider,
     });
     const durationMs = Date.now() - startedAt;
     debugLog(`[gateway] agent answer length=${answer.length}`);
