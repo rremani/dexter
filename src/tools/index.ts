@@ -6,11 +6,10 @@ export type { RegisteredTool } from './registry.js';
 export { createFinancialSearch } from './finance/index.js';
 export { tavilySearch } from './search/index.js';
 
-// Python tool
-export { pythonReplTool } from './python/index.js';
-
 // Tool descriptions
 export {
   FINANCIAL_SEARCH_DESCRIPTION,
+} from './finance/financial-search.js';
+export {
   WEB_SEARCH_DESCRIPTION,
-} from './descriptions/index.js';
+} from './search/index.js';

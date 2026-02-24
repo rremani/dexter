@@ -5,8 +5,6 @@ import { getTools } from '../tools/registry.js';
 import { buildSystemPrompt, buildIterationPrompt, buildFinalAnswerPrompt } from '../agent/prompts.js';
 import { extractTextContent, hasToolCalls } from '../utils/ai-message.js';
 import { InMemoryChatHistory } from '../utils/in-memory-chat-history.js';
-import { initializeMCP } from '../mcp/index.js';
-import { getToolDescription } from '../utils/tool-description.js';
 import { estimateTokens, CONTEXT_THRESHOLD, KEEP_TOOL_USES } from '../utils/tokens.js';
 import type { AgentConfig, AgentEvent, ContextClearedEvent, TokenUsage } from '../agent/types.js';
 import { createRunContext, type RunContext } from './run-context.js';
@@ -46,14 +44,9 @@ export class Agent {
   /**
    * Create a new Agent instance with tools.
    */
-  static async create(config: AgentConfig = {}): Promise<Agent> {
+  static create(config: AgentConfig = {}): Agent {
     const model = config.model ?? DEFAULT_MODEL;
-    const mcpManager = await initializeMCP();
-
-    const tools = [
-      ...getTools(model),
-      ...mcpManager.getTools(),
-    ];
+    const tools = getTools(model);
     const systemPrompt = buildSystemPrompt(model);
     return new Agent(config, tools, systemPrompt);
   }
