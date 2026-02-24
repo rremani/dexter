@@ -11,6 +11,8 @@ import { FINANCIAL_SEARCH_DESCRIPTION } from './finance/financial-search.js';
 import { FINANCIAL_METRICS_DESCRIPTION } from './finance/financial-metrics.js';
 import { READ_FILINGS_DESCRIPTION } from './finance/read-filings.js';
 import { discoverSkills } from '../skills/index.js';
+import { pythonReplTool } from './python/index.js';
+import { PYTHON_REPL_DESCRIPTION } from './descriptions/python-repl.js';
 
 /**
  * A registered tool with its rich description for system prompt injection.
@@ -95,6 +97,13 @@ export function getToolRegistry(model: string): RegisteredTool[] {
       description: WEB_SEARCH_DESCRIPTION,
     });
   }
+
+  // Include python_repl tool
+  tools.push({
+    name: 'python_repl',
+    tool: pythonReplTool,
+    description: PYTHON_REPL_DESCRIPTION,
+  });
 
   // Include skill tool if any skills are available
   const availableSkills = discoverSkills();
