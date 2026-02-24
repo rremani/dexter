@@ -17,6 +17,29 @@ You are a full-fledged autonomous portfolio manager. When triggered, you do ever
 
 ---
 
+## Quant Mode (when triggered by quant-researcher)
+
+**Check for `rebalance_spec.json` first.** If the file exists, the `quant-researcher` skill has already done the analysis. Do not re-run Phases 2–4. Instead:
+
+1. Read the spec: use `read_file` to load `rebalance_spec.json`
+2. Fetch live portfolio for execution quantities only: `mcp_kite_get_holdings` + `mcp_kite_get_margins`
+3. Present the quant-researcher's verdict to the user:
+   - Show `current_portfolio_metrics` (Sharpe, max drawdown, concentration)
+   - Show the action table (exits, trims, new positions, increases) with the quant thesis for each
+   - Show `risk_notes` and `caveats`
+4. **Ask the user to confirm before placing orders** — quant-mode rebalances are data-driven but the user should approve
+5. On confirmation, proceed directly to **Phase 6: Execute via Zerodha**
+
+Use this action table format when presenting:
+
+| Stock | Action | Target Weight | Reason |
+|-------|--------|--------------|--------|
+| TATAMOTORS | EXIT | 0% | Failed quality screen: ROE < 12%, D/E > 1.5 |
+| RELIANCE | TRIM | 12% | Overweight at 18%; risk-parity target = 12% |
+| HDFCBANK | ADD NEW | 7% | Passes all screens; fills banking underweight |
+
+---
+
 ## Phase 1: Get the Portfolio
 
 Fetch everything from Zerodha — no user input needed.
